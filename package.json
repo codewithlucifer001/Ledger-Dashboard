@@ -1,0 +1,17 @@
+{
+  "name": "ledger-freelance-ops",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:client": "npm run dev --workspace=apps/client",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "build:client": "npm run build --workspace=apps/client"
+  },
+  "dependencies": {
+    "resend": "^6.18.0",
+    "stripe": "^22.3.2"
+  }
+}
