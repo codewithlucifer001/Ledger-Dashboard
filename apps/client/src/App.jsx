@@ -68,22 +68,39 @@ export default function App() {
 
   if (view === 'landing') {
     return (
-      <div>
-        <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,242,0.85)', backdropFilter: 'blur(8px)', borderBottom: '1px solid var(--line)' }}>
-          <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '70px' }}>
-            <div className="brand" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+      <div style={{ width: '100%', overflowX: 'hidden' }}>
+        <nav style={{ position: 'sticky', top: 0, zIndex: 50, background: 'rgba(250,248,242,0.95)', backdropFilter: 'blur(8px)', borderBottom: '1px solid var(--line)', width: '100%' }}>
+          <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '64px', boxSizing: 'border-box' }}>
+            {/* Logo / Brand */}
+            <div className="brand" style={{ display: 'flex', alignItems: 'center', gap: '10px', margin: 0 }}>
               <div className="mark" style={{ width: '28px', height: '28px', borderRadius: '7px', background: 'var(--forest)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontWeight: 600 }}>L</div>
               <span style={{ fontFamily: 'var(--serif)', fontWeight: 600, fontSize: '18px' }}>Ledger</span>
             </div>
-            <div style={{ display: 'flex', gap: '30px', fontSize: '14px', color: 'var(--ink-soft)' }}>
+
+            {/* Nav Links - Hidden on Mobile via CSS */}
+            <div className="nav-links-desktop" style={{ display: 'flex', gap: '24px', fontSize: '14px', color: 'var(--ink-soft)' }}>
               <a href="#features" className="nav-link-item" onClick={(e) => handleScrollTo(e, 'features')}>Product</a>
               <a href="#docs" className="nav-link-item" onClick={(e) => handleScrollTo(e, 'docs')}>How it works</a>
               <a href="#pricing" className="nav-link-item" onClick={(e) => handleScrollTo(e, 'pricing')}>Pricing</a>
               <a href="#docs" className="nav-link-item" onClick={(e) => handleScrollTo(e, 'docs')}>Docs</a>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <button className="btn btn-hover-effect" style={{ background: 'transparent', color: 'var(--ink)', border: '1px solid var(--line-strong)', padding: '10px 18px', borderRadius: '8px', cursor: 'pointer' }} onClick={() => handleStartAuth('login')}>Sign in</button>
-              <button className="btn btn-primary btn-hover-effect btn-primary-hover" onClick={() => handleStartAuth('register')}>Start free</button>
+
+            {/* Auth Buttons */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button 
+                className="btn btn-hover-effect" 
+                style={{ background: 'transparent', color: 'var(--ink)', border: '1px solid var(--line-strong)', padding: '6px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '12px' }} 
+                onClick={() => handleStartAuth('login')}
+              >
+                Sign in
+              </button>
+              <button 
+                className="btn btn-primary btn-hover-effect btn-primary-hover" 
+                style={{ padding: '6px 12px', fontSize: '12px' }}
+                onClick={() => handleStartAuth('register')}
+              >
+                Start free
+              </button>
             </div>
           </div>
         </nav>

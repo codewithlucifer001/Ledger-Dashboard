@@ -80,7 +80,7 @@ export default function Dashboard() {
   };
 
   return (
-    <main>
+    <main style={{ minWidth: 0, width: '100%' }}>
       <div className="top-row">
         <div>
           <h1>Dashboard</h1>
@@ -88,7 +88,7 @@ export default function Dashboard() {
             Live ops summary connected to MongoDB Atlas.
           </p>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           <button className="btn" onClick={() => setIsClientModalOpen(true)}>New client</button>
           <button className="btn btn-primary" onClick={() => setIsInvoiceModalOpen(true)}>New invoice</button>
         </div>
@@ -130,21 +130,21 @@ export default function Dashboard() {
           ) : invoices.length === 0 ? (
             <div style={{ padding: '20px', color: 'var(--ink-faint)' }}>No invoices found.</div>
           ) : (
-            <div style={{ width: '100%', overflowX: 'hidden' }}>
-              <table style={{ width: '100%', tableLayout: 'fixed', borderCollapse: 'collapse' }}>
+            <div style={{ width: '100%', overflowX: 'auto' }}>
+              <table style={{ width: '100%', minWidth: '550px', borderCollapse: 'collapse' }}>
                 <thead>
                   <tr>
-                    <th style={{ width: '28%', paddingLeft: '12px' }}>Client</th>
-                    <th style={{ width: '16%' }}>Invoice</th>
-                    <th style={{ width: '16%' }}>Amount</th>
-                    <th style={{ width: '14%' }}>Status</th>
-                    <th style={{ width: '26%', textAlign: 'right', paddingRight: '12px' }}>Actions</th>
+                    <th style={{ paddingLeft: '16px' }}>Client</th>
+                    <th>Invoice</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th style={{ textAlign: 'right', paddingRight: '16px' }}>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {invoices.map((inv) => (
                     <tr key={inv._id}>
-                      <td style={{ paddingLeft: '12px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      <td style={{ paddingLeft: '16px', maxWidth: '160px' }}>
                         <div style={{ fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {inv.clientId?.name || 'Client'}
                         </div>
@@ -166,11 +166,11 @@ export default function Dashboard() {
                           {inv.status}
                         </span>
                       </td>
-                      <td style={{ textAlign: 'right', paddingRight: '12px' }}>
-                        <div style={{ display: 'inline-flex', gap: '3px', justifyContent: 'flex-end', flexWrap: 'nowrap' }}>
+                      <td style={{ textAlign: 'right', paddingRight: '16px' }}>
+                        <div style={{ display: 'inline-flex', gap: '4px', justifyContent: 'flex-end' }}>
                           <button 
                             className="btn" 
-                            style={{ fontSize: '10px', padding: '3px 6px', lineHeight: 1 }}
+                            style={{ fontSize: '11px', padding: '4px 8px', lineHeight: 1 }}
                             onClick={() => setSelectedInvoice(inv)}
                           >
                             View
@@ -178,7 +178,7 @@ export default function Dashboard() {
                           {inv.status !== 'paid' && (
                             <button 
                               className="btn" 
-                              style={{ fontSize: '10px', padding: '3px 6px', lineHeight: 1 }}
+                              style={{ fontSize: '11px', padding: '4px 8px', lineHeight: 1 }}
                               onClick={() => handleStatusChange(inv._id, 'paid')}
                             >
                               Paid
@@ -186,7 +186,7 @@ export default function Dashboard() {
                           )}
                           <button 
                             className="btn" 
-                            style={{ fontSize: '10px', padding: '3px 6px', color: 'var(--forest)', lineHeight: 1 }}
+                            style={{ fontSize: '11px', padding: '4px 8px', color: 'var(--forest)', lineHeight: 1 }}
                             onClick={() => handleSendReminder(inv._id)}
                           >
                             Remind

@@ -31,243 +31,285 @@ export default function Landing({ onNavigateAuth }) {
   };
 
   return (
-    <div style={{ position: 'relative', overflowX: 'hidden' }}>
+    <div style={{ position: 'relative', overflowX: 'hidden', width: '100%', backgroundColor: '#FAF8F2', color: '#211F1A' }}>
       <style>{`
         html { scroll-behavior: smooth; }
-        .nav-link-item { color: var(--ink-soft); transition: color 0.15s ease; cursor: pointer; text-decoration: none; }
-        .nav-link-item:hover { color: var(--ink); }
+        .nav-link-item { color: #6B6656; transition: color 0.15s ease; cursor: pointer; text-decoration: none; }
+        .nav-link-item:hover { color: #211F1A; }
         .btn-hover-effect { transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease; }
         .btn-hover-effect:hover { transform: translateY(-1px); }
-        .btn-primary-hover:hover { background: var(--forest-dark) !important; box-shadow: 0 10px 22px -10px rgba(31,111,92,0.55) !important; }
         .feature-card-hover { transition: background 0.25s ease; }
         .feature-card-hover:hover { background: #FCFAF4 !important; }
         .price-card-hover { transition: transform 0.2s ease; }
         .price-card-hover:hover { transform: translateY(-4px); }
         @keyframes stampIn { to { transform: rotate(-12deg) scale(1); opacity: 1; } }
         @keyframes toastIn { to { opacity: 1; transform: translateY(0); } }
+
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .three-col-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .features-border-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+        @media (max-width: 850px) {
+          .hero-grid, .three-col-grid, .features-border-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          .hero-heading { font-size: 34px !important; }
+          .section-padding { padding: 48px 0 !important; }
+          .hero-cta-buttons { flex-direction: column !important; }
+          .hero-cta-buttons button { width: 100% !important; }
+        }
       `}</style>
 
       {/* Hero Section */}
-      <section style={{ position: 'relative', zIndex: 1, padding: '90px 0 60px' }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 32px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '56px', alignItems: 'center' }}>
-          <div>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 500,
-              color: 'var(--forest)', background: 'var(--forest-dim)', border: '1px solid #CFE3DC',
-              padding: '6px 12px', borderRadius: '100px', marginBottom: '22px'
-            }}>
-              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--forest)' }}></span>
-              Built for freelancers & small studios
-            </div>
-            <h1 style={{ fontFamily: 'var(--serif)', fontSize: '46px', lineHeight: 1.1, fontWeight: 600, marginBottom: '20px' }}>
-              Get paid <em style={{ fontStyle: 'normal', color: 'var(--forest)' }}>on time</em>,<br />every time.
-            </h1>
-            <p style={{ fontSize: '16px', color: 'var(--ink-soft)', maxWidth: '440px', marginBottom: '32px' }}>
-              Ledger is your client CRM, time tracker, and invoicing desk in one place — with automatic reminders for the clients who've gone quiet.
-            </p>
-            <div style={{ display: 'flex', gap: '14px', marginBottom: '20px' }}>
-              <button
-                className="btn btn-primary btn-hover-effect btn-primary-hover"
-                onClick={() => onNavigateAuth('register')}
-                style={{ background: 'var(--forest)', color: '#fff', border: '1px solid var(--forest)', padding: '10px 18px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }}
-              >
-                Start free — no card needed
-              </button>
-              <button
-                className="btn btn-hover-effect"
-                onClick={(e) => scrollToSection(e, 'features')}
-                style={{ background: 'transparent', color: 'var(--ink)', border: '1px solid var(--line-strong)', padding: '10px 18px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }}
-              >
-                See a live invoice
-              </button>
-            </div>
-            <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Free for up to 3 clients · Stripe payments built in</div>
-          </div>
-
-          {/* Signature Animated Invoice Demo */}
-          <div style={{
-            background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '14px',
-            boxShadow: '0 40px 70px -40px rgba(33,31,26,0.25)', padding: '26px 28px', position: 'relative', overflow: 'hidden'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '22px' }}>
-              <div>
-                <div style={{ fontSize: '11px', color: 'var(--ink-faint)', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: '4px' }}>Billed to</div>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: '17px', fontWeight: 600 }}>Northbeam Retail</div>
+      <section className="section-padding" style={{ position: 'relative', zIndex: 1, padding: '70px 0 50px' }}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 20px' }}>
+          <div className="hero-grid">
+            <div>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 500,
+                color: '#1F6F5C', background: '#E4EFEB', border: '1px solid #CFE3DC',
+                padding: '6px 12px', borderRadius: '100px', marginBottom: '20px'
+              }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1F6F5C' }}></span>
+                Built for freelancers & small studios
               </div>
-              <div style={{ fontFamily: 'var(--mono)', fontSize: '12px', color: 'var(--ink-faint)', textAlign: 'right' }}>INV-0096<br />Due Jul 24</div>
-            </div>
-            <div style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', padding: '14px 0', marginBottom: '16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', padding: '6px 0', color: 'var(--ink-soft)' }}>
-                <span>API integration — 14.5 hrs</span><span style={{ fontFamily: 'var(--mono)' }}>$580.00</span>
+              <h1 className="hero-heading" style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '44px', lineHeight: 1.15, fontWeight: 600, marginBottom: '20px' }}>
+                Get paid <em style={{ fontStyle: 'normal', color: '#1F6F5C' }}>on time</em>,<br />every time.
+              </h1>
+              <p style={{ fontSize: '15px', color: '#6B6656', maxWidth: '440px', marginBottom: '28px', lineHeight: 1.5 }}>
+                Ledger is your client CRM, time tracker, and invoicing desk in one place — with automatic reminders for clients who've gone quiet.
+              </p>
+              <div className="hero-cta-buttons" style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
+                <button
+                  className="btn btn-primary btn-hover-effect"
+                  onClick={() => onNavigateAuth('register')}
+                  style={{ background: '#1F6F5C', color: '#FFFFFF', border: '1px solid #1F6F5C', padding: '12px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 600 }}
+                >
+                  Start free — no card needed
+                </button>
+                <button
+                  className="btn btn-hover-effect"
+                  onClick={(e) => scrollToSection(e, 'features')}
+                  style={{ background: '#FFFFFF', color: '#211F1A', border: '1px solid #D7D0BC', padding: '12px 20px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }}
+                >
+                  See a live invoice
+                </button>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', padding: '6px 0', color: 'var(--ink-soft)' }}>
-                <span>Code review & deploy — 2.75 hrs</span><span style={{ fontFamily: 'var(--mono)' }}>$110.00</span>
-              </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'var(--serif)', fontSize: '20px', fontWeight: 600, marginBottom: '8px' }}>
-              <span>Total due</span>
-              <span style={{ fontFamily: 'var(--mono)', fontSize: '22px' }}>$690.00</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12.5px', color: 'var(--ink-faint)' }}>
-              <span style={{ fontSize: '11px', fontWeight: 600, padding: '4px 10px', borderRadius: '100px', background: 'var(--amber-dim)', color: 'var(--amber)' }}>Sent 3 days ago</span>
-              via Stripe payment link
+              <div style={{ fontSize: '13px', color: '#A39D89' }}>Free for up to 3 clients · Stripe payments built in</div>
             </div>
 
+            {/* Signature Animated Invoice Demo */}
             <div style={{
-              position: 'absolute', top: '38px', right: '30px',
-              fontFamily: 'var(--serif)', fontWeight: 700, fontSize: '26px', color: 'var(--forest)',
-              border: '3px solid var(--forest)', borderRadius: '8px', padding: '6px 16px',
-              transform: 'rotate(-12deg) scale(0)', opacity: 0,
-              animation: 'stampIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards 2.1s'
+              background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '14px',
+              boxShadow: '0 20px 40px -15px rgba(33,31,26,0.1)', padding: '24px 20px', position: 'relative', overflow: 'hidden', width: '100%'
             }}>
-              PAID
-            </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+                <div>
+                  <div style={{ fontSize: '11px', color: '#A39D89', textTransform: 'uppercase', letterSpacing: '.05em', marginBottom: '4px' }}>Billed to</div>
+                  <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '17px', fontWeight: 600 }}>Northbeam Retail</div>
+                </div>
+                <div style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '12px', color: '#A39D89', textAlign: 'right' }}>INV-0096<br />Due Jul 24</div>
+              </div>
+              <div style={{ borderTop: '1px solid #E6E1D3', borderBottom: '1px solid #E6E1D3', padding: '12px 0', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', padding: '6px 0', color: '#6B6656' }}>
+                  <span>API integration — 14.5 hrs</span><span style={{ fontFamily: 'JetBrains Mono, monospace' }}>$580.00</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', padding: '6px 0', color: '#6B6656' }}>
+                  <span>Code review & deploy — 2.75 hrs</span><span style={{ fontFamily: 'JetBrains Mono, monospace' }}>$110.00</span>
+                </div>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: 'Fraunces, Georgia, serif', fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>
+                <span>Total due</span>
+                <span style={{ fontFamily: 'JetBrains Mono, monospace', fontSize: '20px' }}>$690.00</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#A39D89' }}>
+                <span style={{ fontSize: '11px', fontWeight: 600, padding: '3px 8px', borderRadius: '100px', background: '#F6EEDD', color: '#B8862E' }}>Sent 3 days ago</span>
+                via Stripe payment link
+              </div>
 
-            <div style={{
-              position: 'absolute', left: '28px', bottom: '-60px', right: '28px',
-              background: 'var(--forest-dark)', color: '#fff', borderRadius: '10px', padding: '12px 16px',
-              display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12.5px',
-              opacity: 0, transform: 'translateY(10px)',
-              animation: 'toastIn 0.5s ease forwards 1.7s'
-            }}>
-              <div style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '11px', flexShrink: 0 }}>✓</div>
-              Payment received — receipt emailed automatically
+              <div style={{
+                position: 'absolute', top: '20px', right: '16px',
+                fontFamily: 'Fraunces, Georgia, serif', fontWeight: 700, fontSize: '20px', color: '#1F6F5C',
+                border: '3px solid #1F6F5C', borderRadius: '8px', padding: '4px 10px',
+                transform: 'rotate(-12deg) scale(0)', opacity: 0,
+                animation: 'stampIn 0.5s cubic-bezier(.34,1.56,.64,1) forwards 1s'
+              }}>
+                PAID
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Bar */}
-      <div style={{ borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--paper)', marginTop: '40px' }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '34px 32px', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
-          <div style={{ textAlign: 'center', borderRight: '1px solid var(--line)' }}><div style={{ fontFamily: 'var(--serif)', fontSize: '26px', fontWeight: 600 }}>$0</div><div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginTop: '4px' }}>to get started</div></div>
-          <div style={{ textAlign: 'center', borderRight: '1px solid var(--line)' }}><div style={{ fontFamily: 'var(--serif)', fontSize: '26px', fontWeight: 600 }}>9 days</div><div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginTop: '4px' }}>avg. faster payment</div></div>
-          <div style={{ textAlign: 'center', borderRight: '1px solid var(--line)' }}><div style={{ fontFamily: 'var(--serif)', fontSize: '26px', fontWeight: 600 }}>100%</div><div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginTop: '4px' }}>of invoices auto-tracked</div></div>
-          <div style={{ textAlign: 'center' }}><div style={{ fontFamily: 'var(--serif)', fontSize: '26px', fontWeight: 600 }}>2 min</div><div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginTop: '4px' }}>to send your first invoice</div></div>
+      <div style={{ borderTop: '1px solid #E6E1D3', borderBottom: '1px solid #E6E1D3', background: '#FFFFFF', padding: '24px 0' }}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 20px' }}>
+          <div className="stats-grid">
+            <div style={{ textAlign: 'center', padding: '8px' }}>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '24px', fontWeight: 600 }}>$0</div>
+              <div style={{ fontSize: '12px', color: '#A39D89', marginTop: '4px' }}>to get started</div>
+            </div>
+            <div style={{ textAlign: 'center', padding: '8px' }}>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '24px', fontWeight: 600 }}>9 days</div>
+              <div style={{ fontSize: '12px', color: '#A39D89', marginTop: '4px' }}>avg. faster payment</div>
+            </div>
+            <div style={{ textAlign: 'center', padding: '8px' }}>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '24px', fontWeight: 600 }}>100%</div>
+              <div style={{ fontSize: '12px', color: '#A39D89', marginTop: '4px' }}>auto-tracked</div>
+            </div>
+            <div style={{ textAlign: 'center', padding: '8px' }}>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '24px', fontWeight: 600 }}>2 min</div>
+              <div style={{ fontSize: '12px', color: '#A39D89', marginTop: '4px' }}>to send first invoice</div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <section id="features" style={{ padding: '90px 0' }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 32px' }}>
-          <div style={{ maxWidth: '560px', margin: '0 auto 52px', textAlign: 'center' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--forest)', marginBottom: '12px' }}>One desk, not five tabs</div>
-            <h2 style={{ fontFamily: 'var(--serif)', fontSize: '32px', fontWeight: 600, marginBottom: '14px' }}>Everything freelancing actually requires</h2>
-            <p style={{ color: 'var(--ink-soft)', fontSize: '15.5px' }}>Stop stitching together a CRM, a timer app, an invoice generator, and a spreadsheet of who owes you money.</p>
+      <section id="features" className="section-padding" style={{ padding: '70px 0' }}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ maxWidth: '560px', margin: '0 auto 36px', textAlign: 'center' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', color: '#1F6F5C', marginBottom: '10px' }}>One desk, not five tabs</div>
+            <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '28px', fontWeight: 600, marginBottom: '12px' }}>Everything freelancing actually requires</h2>
+            <p style={{ color: '#6B6656', fontSize: '15px' }}>Stop stitching together a CRM, a timer app, an invoice generator, and a spreadsheet of who owes you money.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1px', background: 'var(--line)', border: '1px solid var(--line)', borderRadius: '16px', overflow: 'hidden' }}>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', padding: '28px 26px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '9px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontFamily: 'var(--serif)', background: 'var(--forest-dim)', color: 'var(--forest)' }}>◆</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Client CRM</h3>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)' }}>Every client, project, and conversation history in one record — no more digging through old emails.</p>
+          
+          <div className="features-border-grid">
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '8px', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', background: '#E4EFEB', color: '#1F6F5C' }}>◆</div>
+              <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Client CRM</h3>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Every client, project, and conversation history in one record — no more digging through old emails.</p>
             </div>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', padding: '28px 26px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '9px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontFamily: 'var(--serif)', background: 'var(--amber-dim)', color: 'var(--amber)' }}>◷</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Time tracking</h3>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)' }}>Start a timer per project, tag it billable or not, and pull it straight into an invoice with one click.</p>
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '8px', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', background: '#F6EEDD', color: '#B8862E' }}>◷</div>
+              <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Time tracking</h3>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Start a timer per project, tag it billable or not, and pull it straight into an invoice with one click.</p>
             </div>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', padding: '28px 26px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '9px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontFamily: 'var(--serif)', background: 'var(--forest-dim)', color: 'var(--forest)' }}>▤</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Auto-generated invoices</h3>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)' }}>Line items built from logged hours, branded PDF, sent with a Stripe payment link attached.</p>
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '8px', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', background: '#E4EFEB', color: '#1F6F5C' }}>▤</div>
+              <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Auto-generated invoices</h3>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Line items built from logged hours, branded PDF, sent with a Stripe payment link attached.</p>
             </div>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', padding: '28px 26px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '9px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontFamily: 'var(--serif)', background: 'var(--rust-dim)', color: 'var(--rust)' }}>✎</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Contracts & e-signatures</h3>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)' }}>Send a contract, get it signed in-browser, and store the signed PDF against the client record.</p>
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '8px', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', background: '#F7E8E4', color: '#B14A3A' }}>✎</div>
+              <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Contracts & e-signatures</h3>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Send a contract, get it signed in-browser, and store the signed PDF against the client record.</p>
             </div>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', padding: '28px 26px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '9px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontFamily: 'var(--serif)', background: 'var(--amber-dim)', color: 'var(--amber)' }}>◈</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>"Who hasn't paid" dashboard</h3>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)' }}>Every overdue invoice surfaced automatically, with days-overdue and a one-click reminder email.</p>
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '8px', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', background: '#F6EEDD', color: '#B8862E' }}>◈</div>
+              <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>"Who hasn't paid" dashboard</h3>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Every overdue invoice surfaced automatically, with days-overdue and a one-click reminder email.</p>
             </div>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', padding: '28px 26px' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '9px', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontFamily: 'var(--serif)', background: 'var(--forest-dim)', color: 'var(--forest)' }}>▣</div>
-              <h3 style={{ fontFamily: 'var(--serif)', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Stripe payments</h3>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)' }}>Clients pay by card straight from the invoice — no separate merchant account setup required.</p>
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '8px', marginBottom: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', background: '#E4EFEB', color: '#1F6F5C' }}>▣</div>
+              <h3 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '16px', fontWeight: 600, marginBottom: '8px' }}>Stripe payments</h3>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Clients pay by card straight from the invoice — no separate merchant account setup required.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" style={{ padding: '90px 0', background: 'var(--paper)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 32px' }}>
-          <div style={{ maxWidth: '560px', margin: '0 auto 52px', textAlign: 'center' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--forest)', marginBottom: '12px' }}>Pricing</div>
-            <h2 style={{ fontFamily: 'var(--serif)', fontSize: '32px', fontWeight: 600, marginBottom: '14px' }}>Free while you're small</h2>
-            <p style={{ color: 'var(--ink-soft)', fontSize: '15.5px' }}>Upgrade only once Ledger is actually saving you client-chasing time.</p>
+      <section id="pricing" className="section-padding" style={{ padding: '70px 0', background: '#FFFFFF', borderTop: '1px solid #E6E1D3', borderBottom: '1px solid #E6E1D3' }}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ maxWidth: '560px', margin: '0 auto 36px', textAlign: 'center' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', color: '#1F6F5C', marginBottom: '10px' }}>Pricing</div>
+            <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '28px', fontWeight: 600, marginBottom: '12px' }}>Free while you're small</h2>
+            <p style={{ color: '#6B6656', fontSize: '15px' }}>Upgrade only once Ledger is actually saving you client-chasing time.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '20px' }}>
-            <div className="price-card-hover" style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '14px', padding: '32px 28px' }}>
-              <div style={{ fontSize: '13px', color: 'var(--ink-soft)', marginBottom: '10px' }}>Solo — Free</div>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '32px', fontWeight: 600, marginBottom: '4px' }}>$0<span style={{ fontSize: '14px', color: 'var(--ink-faint)', fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '22px' }}>For freelancers just getting started.</div>
-              <ul style={{ listStyle: 'none', fontSize: '13.5px', color: 'var(--ink-soft)', marginBottom: '26px' }}>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Up to 3 clients</li>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Unlimited invoices & time tracking</li>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Stripe payment links</li>
+
+          <div className="three-col-grid">
+            <div className="price-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '14px', padding: '24px 20px' }}>
+              <div style={{ fontSize: '13px', color: '#6B6656', marginBottom: '8px' }}>Solo — Free</div>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '30px', fontWeight: 600, marginBottom: '4px' }}>$0<span style={{ fontSize: '14px', color: '#A39D89', fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: '13px', color: '#A39D89', marginBottom: '20px' }}>For freelancers just getting started.</div>
+              <ul style={{ listStyle: 'none', fontSize: '13.5px', color: '#6B6656', marginBottom: '24px' }}>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Up to 3 clients</li>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Unlimited invoices & time tracking</li>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Stripe payment links</li>
               </ul>
-              <button className="btn btn-hover-effect" style={{ width: '100%', justifyContent: 'center', background: 'transparent', color: 'var(--ink)', border: '1px solid var(--line-strong)', padding: '10px 18px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }} onClick={() => handleSelectPlan('solo')}>Get started</button>
+              <button 
+                className="btn btn-hover-effect" 
+                style={{ width: '100%', justifyContent: 'center', background: 'transparent', color: '#211F1A', border: '1px solid #D7D0BC', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }} 
+                onClick={() => handleSelectPlan('solo')}
+              >
+                Get started
+              </button>
             </div>
-            <div className="price-card-hover" style={{ border: '1px solid var(--forest)', borderRadius: '14px', padding: '32px 28px', position: 'relative', background: 'linear-gradient(180deg, var(--forest-dim), transparent 40%), var(--paper)' }}>
-              <div style={{ position: 'absolute', top: '-12px', left: '28px', background: 'var(--forest)', color: '#fff', fontSize: '11px', fontWeight: 600, padding: '4px 10px', borderRadius: '100px' }}>Most popular</div>
-              <div style={{ fontSize: '13px', color: 'var(--ink-soft)', marginBottom: '10px' }}>Studio</div>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '32px', fontWeight: 600, marginBottom: '4px' }}>$15<span style={{ fontSize: '14px', color: 'var(--ink-faint)', fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '22px' }}>For freelancers juggling a full client roster.</div>
-              <ul style={{ listStyle: 'none', fontSize: '13.5px', color: 'var(--ink-soft)', marginBottom: '26px' }}>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Unlimited clients</li>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Contracts & e-signatures</li>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Automated overdue reminders</li>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Branded invoice templates</li>
+
+            <div className="price-card-hover" style={{ border: '2px solid #1F6F5C', borderRadius: '14px', padding: '24px 20px', position: 'relative', background: '#FFFFFF' }}>
+              <div style={{ position: 'absolute', top: '-12px', left: '20px', background: '#1F6F5C', color: '#FFFFFF', fontSize: '11px', fontWeight: 600, padding: '3px 10px', borderRadius: '100px' }}>Most popular</div>
+              <div style={{ fontSize: '13px', color: '#6B6656', marginBottom: '8px' }}>Studio</div>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '30px', fontWeight: 600, marginBottom: '4px' }}>$15<span style={{ fontSize: '14px', color: '#A39D89', fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: '13px', color: '#A39D89', marginBottom: '20px' }}>For freelancers juggling a full client roster.</div>
+              <ul style={{ listStyle: 'none', fontSize: '13.5px', color: '#6B6656', marginBottom: '24px' }}>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Unlimited clients</li>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Contracts & e-signatures</li>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Automated overdue reminders</li>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Branded invoice templates</li>
               </ul>
-              <button className="btn btn-primary btn-hover-effect btn-primary-hover" style={{ width: '100%', justifyContent: 'center', background: 'var(--forest)', color: '#fff', border: '1px solid var(--forest)', padding: '10px 18px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }} onClick={() => handleSelectPlan('studio')}>Start free trial</button>
+              <button 
+                className="btn btn-primary btn-hover-effect" 
+                style={{ width: '100%', justifyContent: 'center', background: '#1F6F5C', color: '#FFFFFF', border: '1px solid #1F6F5C', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }} 
+                onClick={() => handleSelectPlan('studio')}
+              >
+                Start free trial
+              </button>
             </div>
-            <div className="price-card-hover" style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '14px', padding: '32px 28px' }}>
-              <div style={{ fontSize: '13px', color: 'var(--ink-soft)', marginBottom: '10px' }}>Team</div>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '32px', fontWeight: 600, marginBottom: '4px' }}>$39<span style={{ fontSize: '14px', color: 'var(--ink-faint)', fontWeight: 400 }}>/mo</span></div>
-              <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '22px' }}>For small studios with multiple contractors.</div>
-              <ul style={{ listStyle: 'none', fontSize: '13.5px', color: 'var(--ink-soft)', marginBottom: '26px' }}>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Multiple team members</li>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Per-project profitability reports</li>
-                <li style={{ padding: '7px 0', borderTop: '1px solid var(--line)' }}><span style={{ color: 'var(--forest)', marginRight: '9px' }}>✓</span>Priority support</li>
+
+            <div className="price-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '14px', padding: '24px 20px' }}>
+              <div style={{ fontSize: '13px', color: '#6B6656', marginBottom: '8px' }}>Team</div>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '30px', fontWeight: 600, marginBottom: '4px' }}>$39<span style={{ fontSize: '14px', color: '#A39D89', fontWeight: 400 }}>/mo</span></div>
+              <div style={{ fontSize: '13px', color: '#A39D89', marginBottom: '20px' }}>For small studios with multiple contractors.</div>
+              <ul style={{ listStyle: 'none', fontSize: '13.5px', color: '#6B6656', marginBottom: '24px' }}>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Multiple team members</li>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Per-project profitability reports</li>
+                <li style={{ padding: '6px 0', borderTop: '1px solid #E6E1D3' }}><span style={{ color: '#1F6F5C', marginRight: '8px' }}>✓</span>Priority support</li>
               </ul>
-              <button className="btn btn-hover-effect" style={{ width: '100%', justifyContent: 'center', background: 'transparent', color: 'var(--ink)', border: '1px solid var(--line-strong)', padding: '10px 18px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }} onClick={() => handleSelectPlan('team')}>Talk to us</button>
+              <button 
+                className="btn btn-hover-effect" 
+                style={{ width: '100%', justifyContent: 'center', background: 'transparent', color: '#211F1A', border: '1px solid #D7D0BC', padding: '10px 16px', borderRadius: '8px', cursor: 'pointer', fontWeight: 500 }} 
+                onClick={() => handleSelectPlan('team')}
+              >
+                Talk to us
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Docs / How it works Section */}
-      <section id="docs" style={{ padding: '90px 0' }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 32px' }}>
-          <div style={{ maxWidth: '560px', margin: '0 auto 40px', textAlign: 'center' }}>
-            <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', color: 'var(--forest)', marginBottom: '12px' }}>Docs & Overview</div>
-            <h2 style={{ fontFamily: 'var(--serif)', fontSize: '32px', fontWeight: 600, marginBottom: '14px' }}>How Ledger Works</h2>
-            <p style={{ color: 'var(--ink-soft)', fontSize: '15.5px' }}>Simple, streamlined workflows designed for freelance operations.</p>
+      <section id="docs" className="section-padding" style={{ padding: '70px 0' }}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 20px' }}>
+          <div style={{ maxWidth: '560px', margin: '0 auto 36px', textAlign: 'center' }}>
+            <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', color: '#1F6F5C', marginBottom: '10px' }}>Docs & Overview</div>
+            <h2 style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '28px', fontWeight: 600, marginBottom: '12px' }}>How Ledger Works</h2>
+            <p style={{ color: '#6B6656', fontSize: '15px' }}>Simple, streamlined workflows designed for freelance operations.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '12px', padding: '24px' }}>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>1. Add Clients & Contracts</div>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)', lineHeight: 1.6 }}>Track client details and execute e-signatures right inside the platform.</p>
+
+          <div className="three-col-grid">
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '17px', fontWeight: 600, marginBottom: '8px' }}>1. Add Clients & Contracts</div>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Track client details and execute e-signatures right inside the platform.</p>
             </div>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '12px', padding: '24px' }}>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>2. Log Time & Auto-Invoice</div>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)', lineHeight: 1.6 }}>Track billable project hours and generate single-click invoices.</p>
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '17px', fontWeight: 600, marginBottom: '8px' }}>2. Log Time & Auto-Invoice</div>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Track billable project hours and generate single-click invoices.</p>
             </div>
-            <div className="feature-card-hover" style={{ background: 'var(--paper)', border: '1px solid var(--line)', borderRadius: '12px', padding: '24px' }}>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: '18px', fontWeight: 600, marginBottom: '8px' }}>3. Auto Reminders & Paid Stamps</div>
-              <p style={{ fontSize: '13.5px', color: 'var(--ink-soft)', lineHeight: 1.6 }}>Dispatches email notifications to overdue accounts with Stripe links.</p>
+            <div className="feature-card-hover" style={{ background: '#FFFFFF', border: '1px solid #E6E1D3', borderRadius: '12px', padding: '20px' }}>
+              <div style={{ fontFamily: 'Fraunces, Georgia, serif', fontSize: '17px', fontWeight: 600, marginBottom: '8px' }}>3. Auto Reminders & Paid Stamps</div>
+              <p style={{ fontSize: '13.5px', color: '#6B6656', lineHeight: 1.5 }}>Dispatches email notifications to overdue accounts with Stripe links.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer style={{ padding: '40px 0', borderTop: '1px solid var(--line)' }}>
-        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '13px', color: 'var(--ink-faint)' }}>
-          <div className="brand" style={{ fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <div className="mark" style={{ width: '22px', height: '22px', fontSize: '12px', borderRadius: '5px', background: 'var(--forest)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)' }}>L</div>Ledger
+      <footer style={{ padding: '28px 0', borderTop: '1px solid #E6E1D3', background: '#FAF8F2' }}>
+        <div style={{ maxWidth: '1160px', margin: '0 auto', padding: '0 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px', fontSize: '13px', color: '#A39D89' }}>
+          <div style={{ fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600, color: '#211F1A' }}>
+            <div style={{ width: '22px', height: '22px', fontSize: '12px', borderRadius: '5px', background: '#1F6F5C', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Fraunces, Georgia, serif' }}>L</div>
+            Ledger
           </div>
           <div>© 2026 Ledger. Built for people who bill by the hour.</div>
         </div>
